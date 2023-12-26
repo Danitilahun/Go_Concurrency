@@ -37,4 +37,4 @@ wg.Wait()
 fmt.Println("Wait() executed immediately")
 }
 
-in the above code not calling add before wait will cause the main go routine to behave as default
+In the above code not calling add before wait will cause the main go routine to behave as default
