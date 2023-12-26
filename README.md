@@ -23,3 +23,18 @@ Concurrent programs face several common challenges and problems due to the natur
 4. Resource Starvation: This occurs when a task or thread is unable to access necessary resources (like CPU time, memory, or I/O) because other tasks monopolize or block those resources.
 
 5. Synchronization Overhead: Introducing synchronization mechanisms (like locks, mutexes, or channels) to manage concurrent access to shared resources can lead to overhead. Excessive use of synchronization can impact performance, scalability, and increase complexity.
+
+package main
+
+import (
+"fmt"
+"sync"
+)
+
+func main() {
+var wg sync.WaitGroup
+wg.Wait()
+fmt.Println("Wait() executed immediately")
+}
+
+in the above code not calling add before wait will cause the main go routine to behave as default
