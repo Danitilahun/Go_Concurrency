@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	asyncNotWorking()
-	// asyncTmpFix()
+	// asyncNotWorking()
+	asyncTmpFix()
 }
 
 func asyncNotWorking() {
