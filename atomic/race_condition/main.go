@@ -5,8 +5,6 @@ import (
 	"sync"
 )
 
-// To test for race condition, run this example with the -race flag
-// Command: go run -race main.go
 func main() {
 	var count int32
 	var wg sync.WaitGroup
