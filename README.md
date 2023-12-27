@@ -31,10 +31,11 @@ import (
 "sync"
 )
 
-func main() {
-var wg sync.WaitGroup
-wg.Wait()
-fmt.Println("Wait() executed immediately")
+    func main() {
+    var wg sync.WaitGroup
+    wg.Wait()
+    fmt.Println("Wait() executed immediately")
+
 }
 
 In the above code not calling add before wait will cause the main go routine to behave as default
