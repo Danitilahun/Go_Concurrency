@@ -1,43 +1,43 @@
-# Go_Concurrency
+# Go Concurrency
 
-wmic cpu get NumberOfLogicalProcessors : This command will provide you with the number of logical processors (cores) available on your Windows system.
-wmic cpu get NumberOfCores : The number of physical cores (NumberOfCores) should give you the count of physical cores on your processor.
+## CPU Information Retrieval Commands on Windows
 
-Concurrency is the ability of an application to handle multiple tasks or processes at the same time, seemingly simultaneously, by interleaving their execution.
+- `wmic cpu get NumberOfLogicalProcessors`: Provides the count of logical processors (cores) available on the Windows system.
+- `wmic cpu get NumberOfCores`: Offers the count of physical cores available on the processor.
 
-Parallelism involves the simultaneous execution of multiple tasks or processes, where they genuinely run at the same time, utilizing multiple processors or CPU cores.
+## Definitions
 
-In Go (Golang), "fork-join" refers to a programming pattern where a task is divided into smaller sub-tasks (forking), which are executed independently, and then the results are combined (joined) to produce the final result.
+- **Concurrency**: The capability of an application to handle multiple tasks or processes simultaneously by interleaving their execution.
+- **Parallelism**: Simultaneous execution of multiple tasks genuinely running at the same time using multiple CPU cores.
 
-Fork: Involves breaking down a task into smaller units of work that can be executed concurrently or in parallel.
-Join: The process of merging or aggregating the results obtained from the individual tasks back together to form the final result.
+## Fork-Join in Go (Golang)
 
-Concurrent programs face several common challenges and problems due to the nature of concurrency and the interactions between concurrently executing tasks. Some of the common issues include:
+"Fork-join" in Go refers to dividing a task into smaller sub-tasks (forking), executing them independently, and then merging the results (joining) to produce the final output.
 
-1. Race Conditions: When multiple threads or goroutines access shared resources (like variables or data structures) concurrently without proper synchronization, race conditions can occur. Race conditions lead to unpredictable behavior and incorrect results due to the unexpected interleaving of operations.
+- **Fork**: Breaking a task into smaller units for concurrent or parallel execution.
+- **Join**: Merging the results from individual tasks to form the final result.
 
-2. Deadlocks: Deadlocks occur when two or more tasks are waiting indefinitely for each other to release resources that they hold. This situation halts the progress of all involved tasks, leading to a complete standstill.
+## Common Challenges in Concurrent Programming
 
-3. Livelocks: Similar to deadlocks, livelocks involve tasks being unable to progress due to continuously changing states without reaching a resolution. Tasks keep responding to each other's actions, but no progress is made.
+1. **Race Conditions**: Unpredictable behavior due to multiple threads accessing shared resources without synchronization.
+2. **Deadlocks**: Tasks waiting indefinitely for each other, halting progress.
+3. **Livelocks**: Continuous state changes without resolution, preventing progress.
+4. **Resource Starvation**: Inability to access necessary resources due to monopolization by other tasks.
+5. **Synchronization Overhead**: Introduction of synchronization mechanisms impacting performance and complexity.
 
-4. Resource Starvation: This occurs when a task or thread is unable to access necessary resources (like CPU time, memory, or I/O) because other tasks monopolize or block those resources.
+## Example Code
 
-5. Synchronization Overhead: Introducing synchronization mechanisms (like locks, mutexes, or channels) to manage concurrent access to shared resources can lead to overhead. Excessive use of synchronization can impact performance, scalability, and increase complexity.
-
+```go
 package main
 
 import (
-"fmt"
-"sync"
+    "fmt"
+    "sync"
 )
 
-    func main() {
+func main() {
     var wg sync.WaitGroup
     wg.Wait()
     fmt.Println("Wait() executed immediately")
-
 }
-
-In the above code not calling add before wait will cause the main go routine to behave as default
-
-Batching refers to the process of combining individual items or tasks into groups or batches for more efficient processing, execution, or handling.
+```
