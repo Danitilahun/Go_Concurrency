@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"sync"
 	"sync/atomic"
 )
 
@@ -39,4 +41,34 @@ func (c *calculator) div(n float64) {
 		panic("cannot divide by zero")
 	}
 	c.res.Store(c.result() / n)
+}
+
+func main() {
+	c := newCalculator()
+	var wg sync.WaitGroup
+
+	wg.Add(5)
+	go func() {
+		defer wg.Done()
+		c.add(10)
+	}()
+	go func() {
+		defer wg.Done()
+		c.sub(5)
+	}()
+	go func() {
+		defer wg.Done()
+		c.div(3)
+	}()
+	go func() {
+		defer wg.Done()
+		c.mul(4)
+	}()
+	go func() {
+		defer wg.Done()
+		c.add(13)
+	}()
+
+	wg.Wait()
+	fmt.Println("result", c.result())
 }
