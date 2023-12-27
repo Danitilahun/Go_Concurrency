@@ -30,3 +30,11 @@ func (wg *waitGroup) Done() {
 		panic("negative wait group counter")
 	}
 }
+
+func (wg *waitGroup) Wait() {
+	for {
+		if atomic.LoadInt64(&wg.counter) == 0 {
+			return
+		}
+	}
+}
