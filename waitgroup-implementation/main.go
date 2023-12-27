@@ -1,6 +1,9 @@
 package main
 
-import "sync/atomic"
+import (
+	"fmt"
+	"sync/atomic"
+)
 
 type waitGroup struct {
 	counter int64
@@ -13,7 +16,8 @@ type waitGroup struct {
 // A race condition occurs when multiple operations on shared data interfere with each other, leading to unpredictable or erroneous behavior.
 // The atomic.AddInt64 function ensures that the addition operation on the int64 variable is performed atomically without the possibility
 // of interference from other concurrent operations. It takes care of synchronization and ensures that the addition operation is completed
-//  without interruption.
+//
+//	without interruption.
 func (wg *waitGroup) Add(n int64) {
 	atomic.AddInt64(&wg.counter, n)
 }
@@ -37,4 +41,19 @@ func (wg *waitGroup) Wait() {
 			return
 		}
 	}
+}
+
+func main() {
+	var wg waitGroup
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		fmt.Println("go routine 1")
+	}()
+	go func() {
+		defer wg.Done()
+		fmt.Println("go routine 2")
+	}()
+	wg.Wait()
+	fmt.Printf("all go routines are done")
 }
