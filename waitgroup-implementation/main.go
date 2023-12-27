@@ -17,3 +17,16 @@ type waitGroup struct {
 func (wg *waitGroup) Add(n int64) {
 	atomic.AddInt64(&wg.counter, n)
 }
+
+// In concurrent programming scenarios where multiple goroutines are accessing and modifying the same variable concurrently,
+// reading the variable's value with a simple read operation like x := someInt64Variable might not be safe due to potential
+//  race conditions. A race condition occurs when multiple operations on shared data interfere with each other, leading to
+//  unpredictable or erroneous behavior.The atomic.LoadInt64 function ensures that the read operation on the int64 variable
+//  is performed atomically, without the possibility of interference from other concurrent operations.
+
+func (wg *waitGroup) Done() {
+	atomic.AddInt64(&wg.counter, -1)
+	if atomic.LoadInt64(&wg.counter) < 0 {
+		panic("negative wait group counter")
+	}
+}
