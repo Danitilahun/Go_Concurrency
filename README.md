@@ -38,3 +38,5 @@ fmt.Println("Wait() executed immediately")
 }
 
 In the above code not calling add before wait will cause the main go routine to behave as default
+
+Batching refers to the process of combining individual items or tasks into groups or batches for more efficient processing, execution, or handling.
